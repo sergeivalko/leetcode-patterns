@@ -77,3 +77,16 @@ module Arrays =
             currentMin <- if currentMin < price then currentMin else price
         
         maxProfit
+        
+        
+    // 53. https://leetcode.com/problems/maximum-subarray/
+    let maxSubArray (nums: int[]) =
+        let mutable maxSum = nums[0]
+        let mutable currentSum = nums[0]
+        
+        for i in 1 .. nums.Length - 1 do
+            let num = nums[i]
+            currentSum <- (if (currentSum + num) > num then currentSum + num else num)
+            maxSum <- if maxSum > currentSum then maxSum else currentSum
+            
+        maxSum
