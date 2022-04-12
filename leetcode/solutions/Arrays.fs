@@ -90,3 +90,51 @@ module Arrays =
             maxSum <- if maxSum > currentSum then maxSum else currentSum
             
         maxSum
+        
+        
+    // 303. https://leetcode.com/problems/range-sum-query-immutable/
+    // [|-2;0;3;-5;2;-1|]
+    // -2 -2 1 -4 -2 -3    
+    let subArrayRange (nums: int[]) =
+        let mutable sum = 0
+        let mutable currentSum = 0
+        let mutable sums = []
+        
+        for num in nums do
+            currentSum <- currentSum + num
+            sums <-  sums @ [currentSum]
+        
+        let sumRange left right =
+            if left = 0 then
+                sums[right]
+            else
+                sums[right] - sums[left - 1]
+                
+        sum <- sum + sumRange 0 2
+        sum <- sum + sumRange 2 5
+        sum <- sum + sumRange 0 5
+        
+        sum
+        
+        
+    // 198. https://leetcode.com/problems/house-robber/
+    let rob (nums: int[]) =
+        let mutable maxValueForRob = 0
+        let maxAvailableHouseForRob = if nums.Length % 2 = 0 then nums.Length / 2 else nums.Length / 2 + 1
+        let lenght = nums.Length - 1
+        let mutable attempts = Array.zeroCreate nums.Length |> Array.map (fun _ -> Array.zeroCreate maxAvailableHouseForRob)
+        
+        for house in 0 .. lenght do
+            let mutable currentSum = 0
+            let maxAttemptForCurrentHome = house / 2;
+            for robAttempt in 1 .. maxAvailableHouseForRob do
+                if robAttempt = 1 then
+                    currentSum <- nums[house]
+                    attempts[house][robAttempt - 1] <- nums[house]
+                
+                else if robAttempt - 2 >= 0 then
+                    currentSum <- attempts[house][robAttempt - 2] + attempts[house - 2][robAttempt - 2]
+                    attempts[house][robAttempt - 1] <- currentSum
+
+            maxValueForRob <- if currentSum > maxValueForRob then currentSum else maxValueForRob
+        maxValueForRob
