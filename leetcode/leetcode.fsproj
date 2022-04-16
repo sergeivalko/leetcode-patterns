@@ -6,8 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="solutions\Arrays.fs" />
-        <Compile Include="solutions\DynamicProgramming.fs" />
+        <Compile Include="solutions\Easy.fs" />
+        <Compile Include="solutions\Medium.fs" />
+        <Compile Include="solutions\Hard.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

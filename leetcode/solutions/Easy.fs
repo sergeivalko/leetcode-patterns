@@ -3,7 +3,7 @@
 open Microsoft.FSharp.Collections
 
 [<AutoOpen>]
-module Arrays =
+module Easy =
 
     open System.Collections.Generic
 
@@ -19,23 +19,16 @@ module Arrays =
                 map.Add(num, num)
 
         result
-        
-        
+
+            
     // 268. https://leetcode.com/problems/missing-number/    
     let missingNumber nums =
         let length = nums |> Array.length
         length * (length + 1) / 2 - (nums |> Array.sum)
-        
-    
+
+
     // 468. https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/    
     let findDisappearedNumbers (nums : int []) =
-        let useAdditionalMemory =
-            let array = [|1..(nums |> Array.length)|]
-            for num in nums do
-                if (array[num - 1] = num) then
-                    array[num - 1] <- 0;
-            array |> Array.filter (fun x-> x <> 0)
-            
         let cyclicSort =
              let mutable i = 0
              let length = nums.Length
@@ -65,8 +58,24 @@ module Arrays =
             mask <- mask ^^^ num // xor
                 
         mask
-          
+      
+
+    // 70. https://leetcode.com/problems/climbing-stairs/
+    let climbStairs n =
+        if n = 1 then
+            1
+        else
+            let mutable n1 = 1
+            let mutable n2 = 2
+            
+            for _ in [3.. n] do // fibonacci
+                let temp = n1
+                n1 <- n2
+                n2 <- n1 + temp
+            
+            n2
     
+
     // 121. https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
     let maxProfit (prices: int []) =
         let mutable maxProfit = 0
@@ -90,8 +99,8 @@ module Arrays =
             maxSum <- if maxSum > currentSum then maxSum else currentSum
             
         maxSum
-        
-        
+
+       
     // 303. https://leetcode.com/problems/range-sum-query-immutable/
     // [|-2;0;3;-5;2;-1|]
     // -2 -2 1 -4 -2 -3    
@@ -116,25 +125,65 @@ module Arrays =
         
         sum
         
-        
-    // 198. https://leetcode.com/problems/house-robber/
-    let rob (nums: int[]) =
-        let mutable maxValueForRob = 0
-        let maxAvailableHouseForRob = if nums.Length % 2 = 0 then nums.Length / 2 else nums.Length / 2 + 1
-        let lenght = nums.Length - 1
-        let mutable attempts = Array.zeroCreate nums.Length |> Array.map (fun _ -> Array.zeroCreate maxAvailableHouseForRob)
-        
-        for house in 0 .. lenght do
-            let mutable currentSum = 0
-            let maxAttemptForCurrentHome = house / 2;
-            for robAttempt in 1 .. maxAvailableHouseForRob do
-                if robAttempt = 1 then
-                    currentSum <- nums[house]
-                    attempts[house][robAttempt - 1] <- nums[house]
-                
-                else if robAttempt - 2 >= 0 then
-                    currentSum <- attempts[house][robAttempt - 2] + attempts[house - 2][robAttempt - 2]
-                    attempts[house][robAttempt - 1] <- currentSum
 
-            maxValueForRob <- if currentSum > maxValueForRob then currentSum else maxValueForRob
-        maxValueForRob
+    // 338. https://leetcode.com/problems/counting-bits/
+    let countBits n =
+        let result = Array.zeroCreate (n + 1)
+        
+        for i in 0 .. n do
+            result[i] <- result[i >>> 1] + i % 2
+        
+        result
+        
+
+    // 141. https://leetcode.com/problems/linked-list-cycle/
+    type ListNode = {
+        next: ListNode option
+        value: int
+    }
+    let hasCycle (head:ListNode) =
+        let mutable fast  = head
+        let mutable slow = head
+        let mutable hasCycle = false
+        while (fast.next.IsSome && fast.next.Value.next.IsSome) && (not hasCycle) do
+            fast <- fast.next.Value.next.Value
+            slow <- slow.next.Value
+            if fast = slow then
+                hasCycle <- true
+        hasCycle
+        
+        
+    // 704. https://leetcode.com/problems/binary-search/
+    let binarySearch (nums: int[], target: int) =
+        let mutable left = 0
+        let mutable right  = nums.Length - 1
+        let mutable index = -1
+        let mutable needBreak = false
+        while(left < right) && (not needBreak) do
+            let mid  = (left + right) / 2
+            
+            if nums[mid] = target then
+                index <- mid
+                needBreak <- true
+                
+            else if(nums[mid] > target) then
+                right <- mid - 1
+            else
+                left <- mid + 1
+        index
+    
+    // 744. https://leetcode.com/problems/find-smallest-letter-greater-than-target/    
+    let nextGreatestLetter (letters: char[], target: char) =
+        let mutable left = 0
+        let mutable right = letters.Length - 1
+        
+        if(letters[right] <= target || target < letters[0]) then
+            letters[0]
+        else
+            while left < right do
+                let mid = (left + right) / 2
+                
+                if letters[mid] > target then
+                    right <- mid
+                else left <- mid + 1
+            letters[right]
