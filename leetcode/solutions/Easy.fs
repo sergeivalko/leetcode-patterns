@@ -1,6 +1,7 @@
 ﻿namespace leetcode
 
 open Microsoft.FSharp.Collections
+open Microsoft.FSharp.Core
 
 [<AutoOpen>]
 module Easy =
@@ -138,7 +139,7 @@ module Easy =
 
     // 141. https://leetcode.com/problems/linked-list-cycle/
     type ListNode = {
-        next: ListNode option
+        mutable next: ListNode option
         value: int
     }
     let hasCycle (head:ListNode) =
@@ -151,8 +152,74 @@ module Easy =
             if fast = slow then
                 hasCycle <- true
         hasCycle
+    
+    
+    // 876. https://leetcode.com/problems/middle-of-the-linked-list/
+    let middleNode (head: ListNode option) =
+        let mutable fast  = head
+        let mutable slow = head
+        
+        while (fast.IsSome && fast.Value.next.IsSome) do
+            fast <- fast.Value.next.Value.next
+            slow <- slow.Value.next
+        
+        slow
+        
+    
+    // 206. https://leetcode.com/problems/reverse-linked-list/
+    let reverseList (head: ListNode option) =
+        let mutable prev = Option.None
+        let mutable current = head
+        
+        while current.IsSome do
+            let nxt = current.Value.next
+            current.Value.next <- prev
+            prev <- current
+            current <- nxt
+        
+        prev
+        
+    // 234. https://leetcode.com/problems/palindrome-linked-list/
+    let isPalindrome head =
+        let mutable slow = head
+        let mutable middle = middleNode head
+        middle <- reverseList middle
+        let mutable result = true
+        
+        while middle.IsSome do
+            if slow.Value.value <> middle.Value.value then
+                result <- false
+            slow <- slow.Value.next
+            middle <- middle.Value.next 
+        
+        result
+   
+    
+    // 203. https://leetcode.com/problems/remove-linked-list-elements/
+    let removeElements (node: ListNode option, target: int) =
+        let mutable result = {value = 0; next = node}
+        let mutable current = node
+        while current.IsSome && current.Value.next.IsSome do
+            if(current.Value.next.Value.value = target) then
+                current.Value.next <- current.Value.next.Value.next
+            else
+                current <- current.Value.next
+            
+        result.next
         
         
+    // 83. https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+    let deleteDuplicates (head: ListNode option) =
+        let mutable current = head
+        while current.IsSome && current.Value.next.IsSome do
+            
+            if current.Value.value = current.Value.next.Value.value then
+                current.Value.next <- current.Value.next.Value.next
+            else
+                current <- current.Value.next
+        head
+
+
     // 704. https://leetcode.com/problems/binary-search/
     let binarySearch (nums: int[], target: int) =
         let mutable left = 0
@@ -187,3 +254,17 @@ module Easy =
                     right <- mid
                 else left <- mid + 1
             letters[right]
+            
+
+    // 1. https://leetcode.com/problems/two-sum/
+    let twoSum (nums: int[], target: int) =
+        let mutable map = Map []
+        let mutable result = []
+        for i in 0 .. (nums.Length - 1) do
+            let num = nums[i]
+            
+            if map.ContainsKey (target - num) then
+                result <- (map[target - num]) :: i :: result
+            else
+                map <- map.Add (num, i)
+        result
