@@ -220,6 +220,35 @@ module Easy =
         head
 
 
+    // 21. https://leetcode.com/problems/merge-two-sorted-lists/
+    let mergeTwoLists (list1: ListNode option, list2: ListNode option) =
+        let mutable merged = Option.Some {value = 0; next = Option.None}
+        let result = merged
+        let mutable head1 = list1
+        let mutable head2 = list2
+        
+        while head1.IsSome && head2.IsSome do
+            if head1.Value.value < head2.Value.value then
+                merged.Value.next <- Option.Some {value = head1.Value.value; next = Option.None}
+                head1 <- head1.Value.next
+            else
+                merged.Value.next <- Option.Some {value = head2.Value.value; next = Option.None}
+                head2 <- head2.Value.next
+            merged <- merged.Value.next
+        
+        while head1.IsSome do
+            merged.Value.next <- Option.Some {value = head1.Value.value; next = Option.None}
+            head1 <- head1.Value.next
+            merged <- merged.Value.next
+        
+        while head2.IsSome do
+            merged.Value.next <- Option.Some {value = head2.Value.value; next = Option.None}
+            head2 <- head2.Value.next
+            merged <- merged.Value.next
+        
+        result.Value.next
+    
+    
     // 704. https://leetcode.com/problems/binary-search/
     let binarySearch (nums: int[], target: int) =
         let mutable left = 0
