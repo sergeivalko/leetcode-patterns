@@ -283,8 +283,21 @@ module Easy =
                     right <- mid
                 else left <- mid + 1
             letters[right]
-            
+     
+    
+    // 852. https://leetcode.com/problems/peak-index-in-a-mountain-array/  
+    let peakIndexInMountainArray (arr: int[]) =
+        let mutable left = 0
+        let mutable right = arr.Length - 1
+        while left <= right do
+            let mid = (left + right) / 2
+            if arr[mid] < arr[mid + 1] then
+                left <- mid + 1
+            else
+                right <- mid - 1
+        left
 
+    
     // 1. https://leetcode.com/problems/two-sum/
     let twoSum (nums: int[], target: int) =
         let mutable map = Map []
