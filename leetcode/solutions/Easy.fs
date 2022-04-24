@@ -1,5 +1,6 @@
 ﻿namespace leetcode
 
+open System.Collections.Generic
 open Microsoft.FSharp.Collections
 open Microsoft.FSharp.Core
 
@@ -310,3 +311,40 @@ module Easy =
             else
                 map <- map.Add (num, i)
         result
+
+
+    type TreeNode = {
+        value: int
+        left: TreeNode option
+        right: TreeNode option
+    }
+
+        
+    // 637. https://leetcode.com/problems/average-of-levels-in-binary-tree/
+    let averageOfLevels (root: TreeNode option) =
+        if root.IsNone then
+            []
+        else 
+            let mutable result = []
+            let mutable queue = Queue<TreeNode>()
+            queue.Enqueue(root.Value)
+            let empty () = queue.Count = 0
+
+            while not (empty()) do
+                let n = queue.Count
+                let mutable levelSum = 0                
+                
+                for i in 1 .. n do
+                    let node = queue.Dequeue()
+                    levelSum <- levelSum + node.value
+                    
+                    if node.left.IsSome then
+                        queue.Enqueue(node.left.Value)
+                
+                    if node.right.IsSome then
+                        queue.Enqueue(node.right.Value)
+                
+                let avg = levelSum / n
+                result <- result @ [avg]
+                
+            result        

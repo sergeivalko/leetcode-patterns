@@ -1,6 +1,8 @@
 ﻿namespace leetcode
 
+open System.Collections.Generic
 open Microsoft.FSharp.Collections
+open Microsoft.FSharp.Core
 
 [<AutoOpen>]
 module Medium =
@@ -28,3 +30,31 @@ module Medium =
                 left <- mid + 1
             else right <- mid
         left
+
+   
+    // 102. https://leetcode.com/problems/binary-tree-level-order-traversal/     
+    let levelOrder (root: TreeNode option) =
+        if root.IsNone then
+            []
+        else
+        let mutable result = [[]]
+        let queue = Queue<TreeNode>()
+        queue.Enqueue(root.Value)
+        let empty () = queue.Count = 0
+        
+        while not (empty()) do
+            let mutable newArray = []
+            let n = queue.Count
+            
+            for i in 1 .. n do
+                let node = queue.Dequeue()
+                newArray <- newArray @ [node.value]
+                if node.left.IsSome then
+                    queue.Enqueue(node.left.Value)
+                if node.right.IsSome then
+                    queue.Enqueue(node.right.Value)            
+        
+            result <- result @ [newArray]
+        result
+        
+
