@@ -255,8 +255,8 @@ module Easy =
         let mutable right  = nums.Length - 1
         let mutable index = -1
         let mutable needBreak = false
-        while(left < right) && (not needBreak) do
-            let mid  = (left + right) / 2
+        while(left <= right) && (not needBreak) do
+            let mid  = left +  (right - left) / 2
             
             if nums[mid] = target then
                 index <- mid
@@ -276,8 +276,8 @@ module Easy =
         if(letters[right] <= target || target < letters[0]) then
             letters[0]
         else
-            while left < right do
-                let mid = (left + right) / 2
+            while left <= right do
+                let mid = left +  (right - left) / 2
                 
                 if letters[mid] > target then
                     right <- mid
@@ -290,7 +290,7 @@ module Easy =
         let mutable left = 0
         let mutable right = arr.Length - 1
         while left <= right do
-            let mid = (left + right) / 2
+            let mid = left +  (right - left) / 2
             if arr[mid] < arr[mid + 1] then
                 left <- mid + 1
             else
