@@ -347,4 +347,37 @@ module Easy =
                 let avg = levelSum / n
                 result <- result @ [avg]
                 
-            result        
+            result
+            
+    
+    // 111. https://leetcode.com/problems/minimum-depth-of-binary-tree/
+    let minDepth (root: TreeNode option) =
+        if root.IsNone then
+            0
+        else 
+            let mutable queue = Queue<TreeNode>()
+            queue.Enqueue(root.Value)
+            let empty () = queue.Count = 0
+            let mutable depth = 1
+            let mutable needClear = false
+            while not (empty()) && not needClear do
+                let n = queue.Count
+                for i in 1 .. n do
+                    let node = queue.Dequeue()
+                    
+                    if node.left.IsNone && node.right.IsNone then
+                        needClear <- true
+                    
+                    if node.left.IsSome then
+                        queue.Enqueue(node.left.Value)
+                
+                    if node.right.IsSome then
+                        queue.Enqueue(node.right.Value)
+                        
+                if needClear then
+                    queue.Clear()
+                    
+                if not needClear then
+                    depth <- depth + 1
+                
+            depth
