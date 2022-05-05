@@ -391,3 +391,18 @@ module Easy =
             let leftDepth = maxDepth root.Value.left
             let rightDepth = maxDepth root.Value.right
             (max leftDepth rightDepth) + 1
+
+
+    // 112. https://leetcode.com/problems/path-sum/
+    let hasPathSum (root: TreeNode option, targetSum: int) =
+        let rec pathSum (root: TreeNode option, targetSum: int, currentSum: int) =
+            if root.IsNone then
+                false
+            else if root.Value.left.IsNone && root.Value.right.IsNone then
+                root.Value.value + currentSum = targetSum
+            else
+                let left = pathSum (root.Value.left, targetSum, (currentSum + root.Value.value))
+                let right = pathSum (root.Value.right, targetSum, (currentSum + root.Value.value))
+                left || right
+                        
+        pathSum (root, targetSum, 0)
