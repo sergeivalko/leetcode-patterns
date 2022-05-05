@@ -381,3 +381,13 @@ module Easy =
                     depth <- depth + 1
                 
             depth
+            
+        
+    // 104. https://leetcode.com/problems/maximum-depth-of-binary-tree/    
+    let rec maxDepth (root: TreeNode option) =
+        if root.IsNone then
+            0
+        else
+            let leftDepth = maxDepth root.Value.left
+            let rightDepth = maxDepth root.Value.right
+            (max leftDepth rightDepth) + 1
