@@ -394,15 +394,13 @@ module Easy =
 
 
     // 112. https://leetcode.com/problems/path-sum/
-    let hasPathSum (root: TreeNode option, targetSum: int) =
-        let rec pathSum (root: TreeNode option, targetSum: int, currentSum: int) =
-            if root.IsNone then
-                false
-            else if root.Value.left.IsNone && root.Value.right.IsNone then
-                root.Value.value + currentSum = targetSum
+    let rec hasPathSum (root: TreeNode option, targetSum: int) =
+        if root.IsNone then
+            false
+        else 
+            let newTarget = targetSum - root.Value.value    
+            
+            if root.Value.left.IsNone && root.Value.right.IsNone then
+                newTarget = 0
             else
-                let left = pathSum (root.Value.left, targetSum, (currentSum + root.Value.value))
-                let right = pathSum (root.Value.right, targetSum, (currentSum + root.Value.value))
-                left || right
-                        
-        pathSum (root, targetSum, 0)
+                hasPathSum (root.Value.left, newTarget) || hasPathSum(root.Value.right, newTarget)
