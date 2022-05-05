@@ -1,6 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leetcode", "leetcode\leetcode.fsproj", "{223FB631-4313-4573-9643-B85180F2440F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "leetcode", "leetcode\leetcode.fsproj", "{223FB631-4313-4573-9643-B85180F2440F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B23CD82-6EAD-4BBD-AE5B-B72904B70717}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +21,11 @@ Global
 		{223FB631-4313-4573-9643-B85180F2440F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{223FB631-4313-4573-9643-B85180F2440F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{223FB631-4313-4573-9643-B85180F2440F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34CCC528-9720-4857-926C-31515B96513B}
 	EndGlobalSection
 EndGlobal
