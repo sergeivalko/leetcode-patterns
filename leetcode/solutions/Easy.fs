@@ -418,3 +418,13 @@ module Easy =
             let left = isSameTree(leftTree.Value.left, rightTree.Value.left)
             let right = isSameTree(leftTree.Value.right, rightTree.Value.right)
             left && right
+            
+            
+    // 543. Diameter of Binary Tree
+    let rec diameterOfBinaryTree (root: TreeNode option) =
+        if root.IsNone then
+            0
+        else
+            let leftDepth = maxDepth root.Value.left
+            let rightDepth = maxDepth root.Value.right
+            leftDepth + rightDepth
