@@ -7,8 +7,6 @@ open Microsoft.FSharp.Core
 [<AutoOpen>]
 module Easy =
 
-    open System.Collections.Generic
-
     // 217. https://leetcode.com/problems/contains-duplicate/
     let containsDuplicate (nums: int []) =
         let map = Dictionary<int, int>()
@@ -404,3 +402,19 @@ module Easy =
                 newTarget = 0
             else
                 hasPathSum (root.Value.left, newTarget) || hasPathSum(root.Value.right, newTarget)
+                
+    
+    // 100. https://leetcode.com/problems/same-tree/
+    let rec isSameTree (leftTree: TreeNode option, rightTree: TreeNode option) =
+        if leftTree.IsNone && rightTree.IsNone then
+            true
+        
+        else if leftTree.IsNone || rightTree.IsNone then
+            false
+        
+        else if (leftTree.Value.value <> rightTree.Value.value) then
+            false
+        else 
+            let left = isSameTree(leftTree.Value.left, rightTree.Value.left)
+            let right = isSameTree(leftTree.Value.right, rightTree.Value.right)
+            left && right
