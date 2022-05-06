@@ -312,9 +312,9 @@ module Easy =
 
 
     type TreeNode = {
-        value: int
-        left: TreeNode option
-        right: TreeNode option
+        mutable value: int
+        mutable left: TreeNode option
+        mutable right: TreeNode option
     }
 
         
@@ -428,3 +428,16 @@ module Easy =
             let leftDepth = maxDepth root.Value.left
             let rightDepth = maxDepth root.Value.right
             leftDepth + rightDepth
+            
+            
+    // 617. Merge Two Binary Trees
+    let rec mergeTrees (leftTree: TreeNode option, rightTree: TreeNode option) =
+        if leftTree.IsNone then
+            rightTree
+        else if rightTree.IsNone then
+            leftTree
+        else
+            leftTree.Value.value <- leftTree.Value.value + rightTree.Value.value
+            leftTree.Value.left <- mergeTrees(leftTree.Value.left, rightTree.Value.left)
+            leftTree.Value.right <- mergeTrees(leftTree.Value.right, rightTree.Value.right)
+            leftTree
