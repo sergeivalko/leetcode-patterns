@@ -11,6 +11,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D9419ABD-38C3-4296-B119-CADE6B54792D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "algorithms", "algorithms", "{27D3026D-BE41-4B3C-AE50-72D44449F4C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data-structures", "data-structures", "{378C02FD-6451-455C-8B3A-772BF4F962B3}"
+	ProjectSection(SolutionItems) = preProject
+		docs\data-structures\graph.md = docs\data-structures\graph.md
+		docs\data-structures\linked-list.md = docs\data-structures\linked-list.md
+		docs\data-structures\queue.md = docs\data-structures\queue.md
+		docs\data-structures\stack.md = docs\data-structures\stack.md
+		docs\data-structures\tree.md = docs\data-structures\tree.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sorts", "sorts", "{61297D69-00C0-4663-B3D8-9D43FFCB8439}"
+	ProjectSection(SolutionItems) = preProject
+		docs\algorithms\sorts\bubble.md = docs\algorithms\sorts\bubble.md
+		docs\algorithms\sorts\quick.md = docs\algorithms\sorts\quick.md
+		docs\algorithms\sorts\selection.md = docs\algorithms\sorts\selection.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graphs", "graphs", "{9D5A4982-C056-48E3-AC25-6DB29C5BAAEF}"
+	ProjectSection(SolutionItems) = preProject
+		docs\algorithms\graphs\bfs.md = docs\algorithms\graphs\bfs.md
+		docs\algorithms\graphs\dfs.md = docs\algorithms\graphs\dfs.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "search", "search", "{70BABC1A-9CC9-47DD-B5C0-A87BD15D89F5}"
+	ProjectSection(SolutionItems) = preProject
+		docs\algorithms\search\binary-search.md = docs\algorithms\search\binary-search.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +55,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27D3026D-BE41-4B3C-AE50-72D44449F4C1} = {D9419ABD-38C3-4296-B119-CADE6B54792D}
+		{378C02FD-6451-455C-8B3A-772BF4F962B3} = {D9419ABD-38C3-4296-B119-CADE6B54792D}
+		{61297D69-00C0-4663-B3D8-9D43FFCB8439} = {27D3026D-BE41-4B3C-AE50-72D44449F4C1}
+		{9D5A4982-C056-48E3-AC25-6DB29C5BAAEF} = {27D3026D-BE41-4B3C-AE50-72D44449F4C1}
+		{70BABC1A-9CC9-47DD-B5C0-A87BD15D89F5} = {27D3026D-BE41-4B3C-AE50-72D44449F4C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34CCC528-9720-4857-926C-31515B96513B}
