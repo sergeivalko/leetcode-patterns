@@ -27,3 +27,4 @@
 * Tree
     * [BFS](./docs/algorithms/graphs/bfs.md)
     * [DFS](./docs/algorithms/graphs/dfs.md)
+* [Two pointers](./docs/algorithms/two-pointers.md)
