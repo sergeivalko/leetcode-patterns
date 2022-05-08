@@ -1,6 +1,6 @@
 # leetcode patterns
 
-### This is project for learning basics f#, algorithms, data structure.
+### This is project for learning algorithms, data structure.
 
 [Leetcode tasks](https://seanprashad.com/leetcode-patterns/)
 
