@@ -69,3 +69,16 @@ let twoSum (nums: int[], target: int) =
             left <- left + 1
         
     resultArray    
+
+
+// 344. https://leetcode.com/problems/reverse-string/
+let reverseString (str: char[]) =
+    let mutable left = 0
+    let mutable right = str.Length - 1
+    
+    while left < right do
+        let temp = str[left]
+        str[left] <- str[right]
+        str[right] <- temp
+        left <- left + 1
+        right <- right + 1
