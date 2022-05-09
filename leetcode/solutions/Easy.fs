@@ -441,3 +441,20 @@ module Easy =
             leftTree.Value.left <- mergeTrees(leftTree.Value.left, rightTree.Value.left)
             leftTree.Value.right <- mergeTrees(leftTree.Value.right, rightTree.Value.right)
             leftTree
+
+
+    // 235. Lowest Common Ancestor of a Binary Search Tree
+    let lowestCommonAncestor (root: TreeNode option, p: TreeNode, q: TreeNode) =
+        let mutable node = root
+        let mutable isNeedBreak = false
+        let mutable resultNode = Option.None
+        while node.IsSome && not isNeedBreak do
+            
+            if p.value > node.Value.value && q.value > node.Value.value then
+                node <- node.Value.right
+            else if p.value < node.Value.value && q.value < node.Value.value then
+                node <- node.Value.left
+            else
+                isNeedBreak <- true
+                resultNode <- node
+        resultNode
