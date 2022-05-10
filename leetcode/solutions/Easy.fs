@@ -137,10 +137,6 @@ module Easy =
         
 
     // 141. https://leetcode.com/problems/linked-list-cycle/
-    type ListNode = {
-        mutable next: ListNode option
-        value: int
-    }
     let hasCycle (head:ListNode) =
         let mutable fast  = head
         let mutable slow = head
@@ -150,20 +146,8 @@ module Easy =
             slow <- slow.next.Value
             if fast = slow then
                 hasCycle <- true
-        hasCycle
-    
-    
-    // 876. https://leetcode.com/problems/middle-of-the-linked-list/
-    let middleNode (head: ListNode option) =
-        let mutable fast  = head
-        let mutable slow = head
-        
-        while (fast.IsSome && fast.Value.next.IsSome) do
-            fast <- fast.Value.next.Value.next
-            slow <- slow.Value.next
-        
-        slow
-        
+        hasCycle   
+          
     
     // 206. https://leetcode.com/problems/reverse-linked-list/
     let reverseList (head: ListNode option) =
@@ -309,13 +293,6 @@ module Easy =
             else
                 map <- map.Add (num, i)
         result
-
-
-    type TreeNode = {
-        mutable value: int
-        mutable left: TreeNode option
-        mutable right: TreeNode option
-    }
 
         
     // 637. https://leetcode.com/problems/average-of-levels-in-binary-tree/
