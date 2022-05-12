@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "algorithms", "algorithms", "{27D3026D-BE41-4B3C-AE50-72D44449F4C1}"
 	ProjectSection(SolutionItems) = preProject
 		docs\algorithms\two-pointers.md = docs\algorithms\two-pointers.md
+		docs\algorithms\sliding-window.md = docs\algorithms\sliding-window.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data-structures", "data-structures", "{378C02FD-6451-455C-8B3A-772BF4F962B3}"
